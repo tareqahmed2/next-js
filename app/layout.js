@@ -1,5 +1,8 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import Header from "./components/Header";
+import { AuthProvider } from "./AuthProvider";
+import { ToastContainer } from "react-toastify";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -18,12 +21,33 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
-      </body>
-    </html>
+    <AuthProvider>
+      <html lang="en">
+        <body className="bg-gradient-to-br from-blue-100 via-purple-100 to-pink-100 text-gray-900 min-h-screen flex flex-col">
+          <header className="bg-white shadow-lg sticky top-0 z-50">
+            <div className="">
+              <Header />
+            </div>
+          </header>
+          <main className="flex-1 container mx-auto p-6 bg-white shadow-lg rounded-lg mt-6">
+            {children}
+            <ToastContainer
+              position="top-center"
+              autoClose={3000}
+              hideProgressBar={false}
+              newestOnTop={true}
+              closeButton={true}
+              theme="light"
+              className="z-50"
+            />
+          </main>
+          <footer className="bg-gray-800 text-gray-300 py-4">
+            <div className="container mx-auto text-center">
+              © {new Date().getFullYear()} Blog Viewer. All Rights Reserved.
+            </div>
+          </footer>
+        </body>
+      </html>
+    </AuthProvider>
   );
 }
