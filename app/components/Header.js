@@ -48,7 +48,7 @@ export default function Header() {
   const redirectURL =
     process.env.NODE_ENV === "production"
       ? process.env.KINDE_SITE_URL
-      : "http://localhost:3000";
+      : "https://next-js-jg5a.vercel.app";
 
   return (
     <header className="bg-gray-200 shadow-md p-4">
